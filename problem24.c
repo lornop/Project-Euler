@@ -11,10 +11,24 @@ What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 
 #include <stdio.h>
 #include "problem24.h"
 //**********************************************
+// //Run The Permutation
+// void do_Permutation(__int32_t high_index);
 
-//Functions
-//int find_same_number_index(int, int);
-//int add_permutation(int);
+// //Add another permutation to the total
+// void add_permutation();
+
+// //Find the same numbers index. input is the number, and the starting index. Returns Index
+// __int32_t find_same_number_index(__int32_t, __int32_t);
+
+// //print the digits of the permutation
+// void print_permutation();
+
+// //Swap digits based on the input indexes
+// void swap_digits_with_indexes(__int32_t, __int32_t);
+
+// //Find the lowest number in the array Starting Number, Starting Index. Returns index of lowest number
+// __int32_t find_lowest_number(__int32_t, __int32_t);
+
 
 
 
@@ -75,23 +89,4 @@ int main()
 }
 
 
-// //Find array element that has the same number as the 
-// int find_same_number_index(int x, int y){
-
-// }
-
-// //Add one to the total permutation count and return the new count
-// int add_permutation(int permutation){
-// 	permutation++;
-// 	if (permutation == million){
-// 		printf("The millionth Permutaion is = ");
-// 		for (int x = 0; x < 10; x ++){
-// 			printf(permutation_array[x]);
-// 			exit(0);
-// 		}
-// 	}
-
-// return permutation;
-
-// }
 

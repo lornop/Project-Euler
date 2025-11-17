@@ -54,6 +54,11 @@ void do_Permutation(__int32_t high_index)
 	}
 	
 	//Now we need to start incrementing numbers
+	add_permutation();
+
+	do_Permutation(working_index);
+	
+
 
 
 
@@ -110,6 +115,9 @@ __int32_t find_lowest_number(__int32_t number, __int32_t index)
 void add_permutation()
 {
 	permutation_count++;
+	if (permutation_count == million){
+		print_permutation();
+	}
 }
 
 
