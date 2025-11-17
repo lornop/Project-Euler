@@ -13,7 +13,8 @@ What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 
 //**********************************************
 
 //Functions
-
+//int find_same_number_index(int, int);
+//int add_permutation(int);
 
 
 
@@ -74,6 +75,23 @@ int main()
 }
 
 
+// //Find array element that has the same number as the 
+// int find_same_number_index(int x, int y){
 
+// }
 
+// //Add one to the total permutation count and return the new count
+// int add_permutation(int permutation){
+// 	permutation++;
+// 	if (permutation == million){
+// 		printf("The millionth Permutaion is = ");
+// 		for (int x = 0; x < 10; x ++){
+// 			printf(permutation_array[x]);
+// 			exit(0);
+// 		}
+// 	}
+
+// return permutation;
+
+// }
 
