@@ -9,95 +9,78 @@ What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <inttypes.h>
 
 
-void DoPermutation(__int32_t element);
-__int32_t find_lowest_number(__int32_t number, __int32_t index);
-void swap_digits_with_indexes(__int32_t first_index, __int32_t second_index);
 void add_permutation();
 void print_permutation();
+int checkdigits(uint64_t);
 
 
 //Globals
-__int32_t
+
+uint64_t
 million                 = 1000000,
 permutation_count       = 0,
-permutation_array[10]   = {0,1,2,3,4,5,6,7,8,9},
-permutations_per_digit  = 0,
-arrayindex              = 10,
-workingindex            = 9,
 counter = 123456789;
 
-
-
-
 int main(){
-    while (workingindex >= 0){
-		DoPermutation(workingindex);
-		if (permutation_array[workingindex] == 9){
-			workingindex--;
-			swap_digits_with_indexes(workingindex, 9);
-			
+	while(1){
+		if (checkdigits(counter) == 1){
+			add_permutation();
+			counter++;		
 		}
-        
-    }
-    
-    
 
+		if (checkdigits(counter) == 0){
+			counter++;		
+		}
+		
+	}
 
-return 0;
 }
+
 
 
 //**************************************************************
-void DoPermutation(__int32_t element){
-    
-    //If we have sorted to the last digit, then we are done and can add one to the permutation
-    if (element > 9){
-        add_permutation();
-		
-    }
-
-    if (element < 9){
-
-              
-		DoPermutation(element +1);
-    }
-
-	if (element == 9){
-		DoPermutation(element +1);
-	}
-
-}
+int checkdigits(uint64_t number){
+	//Trying something new
+	//Going to check every digit and see if they are the same or not. Return 1 if they are differnt
+	//which means its a new permutation. Return 0 if its they are some the same and its not a new permutation
+	//then just increment the counter. Brute Force this MF
 
 
 
-//*find the a lower nunber in the array than the number entered. returns the index of the lowest number******
-__int32_t find_lowest_number(__int32_t number, __int32_t index)
-{
-	__int32_t low_num_index = index;
-	for (index; index <=9; index++)
-	{
-		if (permutation_array[index] < number)
-		{
-			number = permutation_array[index];
-			low_num_index = index;
+	int singledigits[10];
+	int check = 0;
+
+	singledigits[0] = number / 1000000000 % 10;
+	singledigits[1] = number / 100000000 % 10;
+	singledigits[2] = number / 10000000 % 10;
+	singledigits[3] = number / 1000000 % 10;
+	singledigits[4] = number / 100000 % 10;
+	singledigits[5] = number / 10000 % 10;
+	singledigits[6] = number / 1000 % 10;
+	singledigits[7] = number / 100 % 10;
+	singledigits[8] = number / 10 % 10;
+	singledigits[9] = number / 1 % 10;
+
+	while(check < 10){
+		for(int x = (check +1); x < 10; x++){
+			if(singledigits[check] == singledigits[x]){
+				return(0);
+				break;
+
+			}
+			
 		}
+		check++;
+		
 	}
-	return low_num_index;
+	return(1);
 }
 
-//*Swap two digits in the array around based on their indexs*********************************************
-void swap_digits_with_indexes(__int32_t first_index, __int32_t second_index)
-{
-	__int32_t
-	first_digit = permutation_array[first_index],
-	second_digit = permutation_array[second_index];
 
-	permutation_array[second_index] = first_digit;
-	permutation_array[first_index] = second_digit;
-
-}
 
 //*Add One to the total Number of Permutations*********************************************
 void add_permutation()
@@ -112,11 +95,8 @@ void add_permutation()
 void print_permutation()
 {
 	//If we are all done print out the millionth permutation
-	printf("The %d th Permutation is : ", permutation_count);
-	for (int i = 0; i < 10; i++)
-	{
-		printf("%d", permutation_array[i]);
-	}
-	printf("\n");
+	printf("The %d th Permutation is : ", million);
+	printf("%" PRIu64 "\n", counter);
+
     exit(0);
 }
