@@ -64,7 +64,7 @@ int main()
 
 			//Run the algorithm to sort out the permutation
 			do_Permutation(permutation_index);
-			add_permutation();
+			//add_permutation();
 
 		}
 		
@@ -78,8 +78,6 @@ int main()
 			print_permutation();
 			return 0;
 		}
-
-
 
 	}
 	

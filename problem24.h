@@ -47,6 +47,8 @@ void do_Permutation(__int32_t high_index)
 
 	//First lets find the smallest number and put it in the leftmost place
 
+
+
 	for(temp_index = working_index; temp_index < 9; temp_index++)
 	{
 		low_number_index = find_lowest_number((permutation_array[temp_index]), temp_index);
