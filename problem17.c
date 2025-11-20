@@ -113,7 +113,7 @@ int GetSize(int numeral){
         return(strlen("thirty"));
         break;
     case 40:
-        return(strlen("fourty"));
+        return(strlen("forty"));
         break;
     case 50:
         return(strlen("fifty"));
@@ -150,10 +150,7 @@ void ParseNumberToArray(int number){
 //Start going through the array elements and count up letters and return the result
 int DigitToCount(){
     int total =0;
-    if( (singledigits[0] && singledigits[0] != 0) && ( (singledigits[2] && singledigits[3] != 0) )){   //If the first two numbers are not 0 there is an "and"
-        total += 3;
 
-    }
     if(singledigits[0] != 0){   //Thousands digit
         total += GetSize(singledigits[0]);
         total += GetSize(1000);
@@ -166,7 +163,7 @@ int DigitToCount(){
 
     }
 
-    if(singledigits[2] != 0){   //Tens and ones digits
+    if(singledigits[2] != 0){   //Tens and teens digits
         if(singledigits[2] > 1){                        //twenty, thirty etc...
             total += GetSize((singledigits[2]) * 10 );  
             total += GetSize(singledigits[3]);          //one, two etc...
@@ -182,5 +179,14 @@ int DigitToCount(){
         total += GetSize(singledigits[3]);
 
     }
+
+    if( (singledigits[0] || singledigits[1]) != 0){
+        if( (singledigits[2] || singledigits[3]) != 0){
+            total += 3;                                             //and
+        }
+        
+    }
+
+
     return (total);
 }
