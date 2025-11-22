@@ -23,7 +23,7 @@ int getSum(int);                        //Enter an int and get the sum of its di
 
 /* Globals */
 
-int maxNum                  = 2147483646;              //9! is 362880 so 7 times that is just over 2.5 mil
+int maxNum                  = 2600000;              //9! is 362880 so 7 times that is just over 2.5 mil
 int totalSum                = 0;                    //Store the sum of all required factorials
 int factorials[10];                         //store all the factorials for 0-9 so we only do it once
 int count = 3;                              //Start going. 1 and 2 dont count
@@ -54,6 +54,9 @@ int factorialgetter(int num){
     int sum = num;
     for (int x = (num - 1); x > 0; x--){
         sum *= x;
+    }
+    if(num < 2){            //So i guess 0! and 1! are both 1. I had 0! as 0
+        sum = 1;
     }
     return(sum);
 }
