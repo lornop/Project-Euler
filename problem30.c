@@ -27,7 +27,7 @@ int numPlaces(int);
 
 
 /* Globals */
-int maxNum      = 99999999;         //I don t really know what this should be....
+int maxNum      = 999999;         //9^5 ~=60,000  60,000 x 6 = 360,000  So 6 Digits should be enough
 int count       = 2;              //1 doesnt count so we are starting at 2
 int totalSum    = 0;              //Keep track of the running total sum
 
@@ -49,7 +49,7 @@ int main()
 /* Get Fifth Power of a number*/
 int PowerFive(int number){
     int fifth = number; 
-    for(int x = 0; x < 5; x++){
+    for(int x = 0; x < 4; x++){
         fifth *= number;
     }
     return(fifth);
