@@ -13,12 +13,80 @@ How many circular primes are there below one million?
 
 /* Function Prototypes */
 
+void allDone(int);
+void foundOne(int);
+int primecheck(int);
+int circlecheck(int);
+
+
 /* Globals */
+int primesFound         = 0;
+int count               = 2;
+int maxCount            = 1000000;
+
 
 int main()
 {
+    while(count < maxCount){
+        count ++;
+        if (primecheck(count) == 1){
+            if (circlecheck(count) == 1){
+                foundOne(count);
+            }
+        }
+    }
 
-return 0;
+    allDone(primesFound);
+    return 0;
 }
 
-/* */
+/* Found all the circular primes up to a million */
+void allDone(int num){
+    printf("Found this many circular primes: %d \n", num);
+}
+
+/* Found a circular Prime*/
+void foundOne(int prime){
+    printf("Circular Prime found! : %d \n", prime);
+    primesFound++;
+
+}
+
+/* Check if an int is prime. Return 0 (no) or 1 (yes) */
+int primecheck(int check){
+    if (check <= 1) return 0;
+    if (check == 2) return 1;
+    if (check % 2 == 0) return 0;
+
+    int num = 3;
+    int limit = num * num;     // store the square once
+
+    while (limit <= check) {
+        if (check % num == 0){
+            return 0;
+        } 
+        num += 2;               //Skip even numbers
+        limit = num * num;      // update once each iteration
+    }
+
+    return 1;
+}
+
+
+/* Rearange number and send it to primecheck() Return 0 (no) or 1 (yes) */
+int circlecheck(int num){
+    int circle = 0;
+    //Do some iteration stuff
+
+    if (primecheck(num) == 1){
+        circle = 1;
+        //Go to next iteration
+    }
+    else {
+        circle = 0;
+        return circle;
+    }
+
+    return circle;
+}
+
