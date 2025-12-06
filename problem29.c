@@ -44,23 +44,34 @@ int main()
     int base = 0;
     int exponent = 0;
 
+
+    //So this all works, excpet it doesnt go high enough
+    //I need to instead of looking for 2^100 for the 4's or 16's etc
+    //I need the 16's to look in the 4's, and the 64's to look in the 16's etc..
     while (y <= max){
         base = findroot(y);
         if (base != 0){
             exponent = findexponent(base, y);
-            
         }
+
         else{
             base = 1;
             exponent = 1;
         }
 
-        while(exp <= max){
-            if(search((exp * exponent), base) == 0){
-                foundone(exp, y);
+        while(exponent >= 1){       //Get rid of this, im just doing all of them now ..
+
+            while(exp <= max){
+                if(search((exp * exponent), base) == 0){
+                    foundone(exp, y);
+                }
+                exp++;
             }
-            exp++;
+            exponent --;
+            base *= base;
+            exp = 2;
         }
+
         exp = 2;
         y++;
         
