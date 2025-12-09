@@ -22,7 +22,8 @@ void foundone(int, int);
 void loadArray();
 int search(int, int);   
 int findroot(int);
-int findexponent(int, int);      
+int findexponent(int, int);
+int calculateTotal();  
 
 /* Globals */
 
@@ -44,45 +45,33 @@ int main()
     int base = 0;
     int exponent = 0;
 
-
-    //So this all works, excpet it doesnt go high enough
-    //I need to instead of looking for 2^100 for the 4's or 16's etc
-    //I need the 16's to look in the 4's, and the 64's to look in the 16's etc..
     while (y <= max){
         base = findroot(y);
+        exp = 2;
         if (base != 0){
             exponent = findexponent(base, y);
         }
-
         else{
-            base = 1;
+            base = y;
             exponent = 1;
         }
-
-        while(exponent >= 1){       //Get rid of this, im just doing all of them now ..
-
-            while(exp <= max){
-                if(search((exp * exponent), base) == 0){
-                    foundone(exp, y);
-                }
-                exp++;
+        while(exp <= max){
+            if(search((exp * exponent), base) == 0){
+                foundone((exp * exponent), base);
             }
-            exponent --;
-            base *= base;
-            exp = 2;
+            exp++;
         }
-
-        exp = 2;
         y++;
-        
     }
     printresult(total);
+    printf("searching...  ");
+    printresult(calculateTotal());
     return 0;
 }
 
 /* All done, print out the results , results */
 void printresult(int terms){
-    printf(" The number of distnct terms is: %d \n", terms);
+    printf("The number of distnct terms is: %d \n", terms);
 
 }
 
@@ -117,18 +106,18 @@ int search(int exp, int num){
 
 /* Search if there is a square root of a number, return the root or 0 if there isnt one 
     and we also add the root to the second column of the number array found[1][root]*/
-int findroot(int num){
-    int y = 2;
-    int root = 0;
-    int product = 1;
-    for (y = 2; y <= 10; y++){
-        product = 1;
-        root = 0;
-        while(product <= num){
+int findroot(int num) {
+    int y;
+    for (y = 2; y <= 10; y++) {
+        int root = 0;
+        int product = 1;
+
+        while (product <= num) {
             product *= y;
             root++;
-            if(product == num){
-                found[1][num] = y;
+
+            if (product == num) {
+                found[1][num] = y;   // <-- FIXED
                 return y;
             }
         }
@@ -145,4 +134,18 @@ int findexponent(int base, int number){
         exponent++;
     }
     return exponent;
-}  
+} 
+
+/* Lets see if the totals match up at the end
+    I will search the array for 1's and compare to the counter */
+int calculateTotal(){
+    int tot = 0;
+    for (int y = 2; y <=100; y++){
+        for (int x = 2; x <= NumberOfExponents; x++){
+            if (found[x][y] == 1){
+                tot++;
+            }
+        }
+    }
+    return tot;
+}
