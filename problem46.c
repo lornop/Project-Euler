@@ -26,7 +26,7 @@ int composite(int);
 void gotit(int);
 
 /* Globals */
-int primes[];
+int primes[1000];
 int numofprimes = 0;
 
 
@@ -58,7 +58,7 @@ return 0;
 number return 1. If its not, return 0 */
 int composite(int num){
     int primenumber = 0;
-    int square = 2;
+    int square = 1;
 
     while (primenumber <= numofprimes){
         for (square; (square * square) < num; square++){
@@ -66,7 +66,7 @@ int composite(int num){
                 return 1;
             }
         }
-        square = 2;
+        square = 1;
         primenumber++;
     }
     return 0;
