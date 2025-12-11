@@ -37,7 +37,15 @@ in the 20 × 20 grid?
 
 /* Function Prototypes */
 
+int down(int, int);
+int right(int, int);
+int downright(int, int);
+int downleft(int, int);
+int largest(int);
+void printresult(int);
+
 /* Globals */
+int greatestproduct = 0;
 int grid[20][20] = 
 {
     {  8,  2, 22, 97, 38, 15,  0, 40,  0, 75,  4,  5,  7, 78, 52, 12, 50, 77, 91,  8 },
@@ -65,8 +73,92 @@ int grid[20][20] =
 
 int main()
 {
+    int x = 0;
+    int y = 0;
+
+    while(y < 20){
+        for (x = 0; x < 20; x++){
+            greatestproduct = largest(down(x, y));
+            greatestproduct = largest(right(x, y));
+            greatestproduct = largest(downright(x, y));
+            greatestproduct = largest(downleft(x, y));
+        }
+        y++;
+    }
+
+    printresult(greatestproduct);
 
 return 0;
 }
 
-/* */
+/* Check if we have a new largest product */
+int largest(int num){
+    if (num > greatestproduct){
+        printf("We have new greatest product: %d\n", num);
+        return num;
+    }
+    else{
+        return greatestproduct;
+    }
+}
+
+/* Check 4 down and return product */
+int down(int x, int y){
+    int prod = 1;
+    if (y > 16){
+        prod = 0;
+    }
+    else{
+        for (int i = 0; i <= 3; i++){
+            prod *= grid[x][y + i];
+        }  
+    }
+    return prod;
+}
+
+/* Check 4 right and return product */
+int right(int x, int y){
+    int prod = 1;
+    if (x > 16){
+        prod = 0;
+    }
+    else{
+        for (int i = 0; i <= 3; i++){
+            prod *= grid[x + i][y];
+        }  
+    }
+    return prod;
+}
+
+/* Check 4 Diag down right and return product */
+int downright(int x, int y){
+    int prod = 1;
+    if ((x > 16) || (y > 16)){
+        prod = 0;
+    }
+    else{
+        for (int i = 0; i <= 3; i++){
+            prod *= grid[x + i][y + i];
+        }  
+    }
+    return prod;
+}
+
+/* Check 4 Diag down left and return product */
+int downleft(int x, int y){
+    int prod = 1;
+    if ((x < 3) || (y > 16)){
+        prod = 0;
+    }
+    else{
+        for (int i = 0; i <= 3; i++){
+            prod *= grid[x - i][y + i];
+        }  
+    }
+    return prod;
+}
+
+/* Print out the result */
+void printresult(int prod){
+    printf("The largest product found is: %d \n", prod);
+}
