@@ -25,12 +25,38 @@ Find the value of d < 1000 for which 1/d contains the longest recurring cycle in
 
 /* Function Prototypes */
 
+void printresult (int, int);
+
 /* Globals */
 
 int main()
 {
+    /* Variables */
+    int d = 2;          //Current value of d
+    int digits = 0;     //Number of digits for the current d
+    int maxd = 0;       //The value of d with the most digits
+    int maxdigits = 0;  //Number of digits for the longest d
+    
 
-return 0;
+    /* Main Loop */
+    while (d < 1000){
+
+        if (digits > maxdigits){
+            maxd = d;
+            maxdigits = digits;
+        }
+        d++;
+    }
+
+    printresult (maxd, maxdigits);
+    return 0;
 }
 
-/* */
+/*  Print out the resulting denominator and how many digits it was 
+    printresult(result, length);  */
+void printresult (int result, int length){
+    printf("The longest cylcle is for 1/%d and it is %d digits long./n", result, length);
+}
+
+
+ 
