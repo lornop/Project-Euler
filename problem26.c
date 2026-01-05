@@ -26,8 +26,10 @@ Find the value of d < 1000 for which 1/d contains the longest recurring cycle in
 /* Function Prototypes */
 
 void printresult (int, int);
+int longdivision (int);
 
 /* Globals */
+int quotientarray[999];
 
 int main()
 {
@@ -40,6 +42,7 @@ int main()
 
     /* Main Loop */
     while (d < 1000){
+        digits = longdivision(d);
 
         if (digits > maxdigits){
             maxd = d;
@@ -52,11 +55,45 @@ int main()
     return 0;
 }
 
+
 /*  Print out the resulting denominator and how many digits it was 
     printresult(result, length);  */
 void printresult (int result, int length){
-    printf("The longest cylcle is for 1/%d and it is %d digits long./n", result, length);
+    printf("\nThe longest cylcle is for 1/%d and it is %d digits long.\n", result, length);
 }
 
 
- 
+/*  Take the number and do long division. Return how many digits the quotient is 
+    length longdivision(d);  */
+int longdivision(int number){
+    int position = 0;
+    int x = 10;
+    //quotientarray[];
+    
+    while(1){
+        while (x < number){
+            x *= 10;
+            quotientarray[position] = 0;
+            position++;  
+        }
+
+        quotientarray[position] = number / x;
+        x = number % x;
+        position++;
+        //if(thestringmatches) return length;
+        int length = match(position);
+        if (length > 0 ){
+            return length;
+        }
+    }
+}
+
+/*  Looks at quotientarry and finds a length of matchings numbers. Returns the length of them
+    or returns 0 if there is no matching string. Takes position as an arg so we have an ending of our search
+    length match(position);  */
+int match(int lastnum){
+    int length = 0;
+
+
+    return length;
+}
