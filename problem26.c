@@ -42,7 +42,8 @@ int main()
 
     /* Main Loop */
     while (d < max){
-        digits = longdivision(d);
+        //digits = longdivision(d);
+        digits = cycle_length(d);
 
         if (digits > maxdigits){
             maxd = d;
@@ -78,7 +79,7 @@ int longdivision(int number){
         }
 
         //If the remainder is < number
-        if((x < number) && (x |= 0)){
+        if((x < number) && (x != 0)){
             x *= 10;
             quotientarray[position][0] = 0;
             quotientarray[position][1] = 0;
@@ -107,4 +108,37 @@ int longdivision(int number){
             quotientarray[position][1] = 0;
         }   
     }
+}
+
+
+int cycle_length(int d)
+{
+    int seen[1000];     // seen[r] = the position where remainder r was first seen
+    int remainder;
+    int position = 0;
+
+    // Mark all remainders as "not seen yet"
+    for (int i = 0; i < d; i++)
+    {
+        seen[i] = -1;
+    }
+
+    remainder = 1 % d;
+
+    // Keep dividing until remainder repeats or becomes 0
+    while (remainder != 0 && seen[remainder] == -1)
+    {
+        seen[remainder] = position;        // remember where we saw this remainder
+        remainder = (remainder * 10) % d;  // do next step of long division
+        position++;
+    }
+
+    // If remainder becomes 0, decimal terminates → no repeating cycle
+    if (remainder == 0)
+    {
+        return 0;
+    }
+
+    // Otherwise, we found a repeated remainder → calculate cycle length
+    return position - seen[remainder];
 }
