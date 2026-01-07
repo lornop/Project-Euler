@@ -40,7 +40,7 @@ int main()
     
 
     /* Main Loop */
-    while (d < 1000){
+    while (d < 10){
         digits = longdivision(d);
 
         if (digits > maxdigits){
@@ -68,44 +68,38 @@ int longdivision(int number){
     int position = 0;
     int x = 10;
     int quotientarray[999][2];
-    //quotientarray[];
-    
+
+    while ((x < number) && (x |= 0)){
+        x *= 10;
+        quotientarray[position][0] = 0;
+        quotientarray[position][1] = 0;
+        position++;              
+    }
+
+
     while(1){
-        while (x <= number){
+        while ((x < number) && (x |= 0)){
             x *= 10;
+            position++;
             quotientarray[position][0] = 0;
-            quotientarray[position][1] = 0;
-            position++;  
+            quotientarray[position][1] = 0;              
         }
-        quotientarray[position][0] = number / x;
-        quotientarray[position][1] = number % x;
+        
+        quotientarray[position][0] = x / number;
+        quotientarray[position][1] = x % number;
         x = quotientarray[position][1];
 
         if((x == 0) && (quotientarray[position][0] == 0)){
             return 0;
         }
         
-        //if(thestringmatches) return length;
         for (int length = 0; length < position; length++){
             if(quotientarray[length][0] == quotientarray[position][0]){
                 if (quotientarray[length][1] == quotientarray[position][1]){
                     return length;
                 }
             }
-        }
-        position++;
-        
+        }      
     }
 }
 
-/*  Looks at quotientarry and finds a length of matchings numbers. Returns the length of them
-    or returns 0 if there is no matching string. Takes position as an arg so we have an ending of our search
-    length match(position);  */
-int match(int lastnum){
-    int length = 0;
-    int x = 0;
-
-
-
-    return length;
-}
