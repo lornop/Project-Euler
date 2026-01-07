@@ -29,7 +29,6 @@ void printresult (int, int);
 int longdivision (int);
 
 /* Globals */
-int quotientarray[999];
 
 int main()
 {
@@ -68,23 +67,34 @@ void printresult (int result, int length){
 int longdivision(int number){
     int position = 0;
     int x = 10;
+    int quotientarray[999][2];
     //quotientarray[];
     
     while(1){
-        while (x < number){
+        while (x <= number){
             x *= 10;
-            quotientarray[position] = 0;
+            quotientarray[position][0] = 0;
+            quotientarray[position][1] = 0;
             position++;  
         }
+        quotientarray[position][0] = number / x;
+        quotientarray[position][1] = number % x;
+        x = quotientarray[position][1];
 
-        quotientarray[position] = number / x;
-        x = number % x;
-        position++;
-        //if(thestringmatches) return length;
-        int length = match(position);
-        if (length > 0 ){
-            return length;
+        if((x == 0) && (quotientarray[position][0] == 0)){
+            return 0;
         }
+        
+        //if(thestringmatches) return length;
+        for (int length = 0; length < position; length++){
+            if(quotientarray[length][0] == quotientarray[position][0]){
+                if (quotientarray[length][1] == quotientarray[position][1]){
+                    return length;
+                }
+            }
+        }
+        position++;
+        
     }
 }
 
@@ -93,6 +103,8 @@ int longdivision(int number){
     length match(position);  */
 int match(int lastnum){
     int length = 0;
+    int x = 0;
+
 
 
     return length;
