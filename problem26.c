@@ -33,6 +33,7 @@ int longdivision (int);
 int main()
 {
     /* Variables */
+    int max = 1000;     //The largest value of d we are seaching to
     int d = 2;          //Current value of d
     int digits = 0;     //Number of digits for the current d
     int maxd = 0;       //The value of d with the most digits
@@ -40,7 +41,7 @@ int main()
     
 
     /* Main Loop */
-    while (d < 10){
+    while (d < max){
         digits = longdivision(d);
 
         if (digits > maxdigits){
@@ -58,7 +59,7 @@ int main()
 /*  Print out the resulting denominator and how many digits it was 
     printresult(result, length);  */
 void printresult (int result, int length){
-    printf("\nThe longest cylcle is for 1/%d and it is %d digits long.\n", result, length);
+    printf("\nThe longest cycle is for 1/%d and it is %d digits long.\n", result, length);
 }
 
 
@@ -96,7 +97,7 @@ int longdivision(int number){
             for (int length = 0; length < position; length++){
                 if(quotientarray[length][0] == quotientarray[position][0]){
                     if (quotientarray[length][1] == quotientarray[position][1]){
-                        return length;
+                        return position - length;
                     }
                 }
             }
@@ -107,47 +108,3 @@ int longdivision(int number){
         }   
     }
 }
-
-    
-
-    
-
-
-
-
-
-
-//     while ((x < number) && (x |= 0)){
-//         x *= 10;
-//         quotientarray[position][0] = 0;
-//         quotientarray[position][1] = 0;
-//         position++;              
-//     }
-
-
-//     while(1){
-//         while ((x < number) && (x |= 0)){
-//             x *= 10;
-//             position++;
-//             quotientarray[position][0] = 0;
-//             quotientarray[position][1] = 0;              
-//         }
-        
-//         quotientarray[position][0] = x / number;
-//         quotientarray[position][1] = x % number;
-//         x = quotientarray[position][1];
-
-//         if((x == 0) && (quotientarray[position][0] == 0)){
-//             return 0;
-//         }
-        
-//         for (int length = 0; length < position; length++){
-//             if(quotientarray[length][0] == quotientarray[position][0]){
-//                 if (quotientarray[length][1] == quotientarray[position][1]){
-//                     return length;
-//                 }
-//             }
-//         }      
-//     }
-// }
-
