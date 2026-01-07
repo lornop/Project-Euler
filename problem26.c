@@ -69,37 +69,85 @@ int longdivision(int number){
     int x = 10;
     int quotientarray[999][2];
 
-    while ((x < number) && (x |= 0)){
-        x *= 10;
-        quotientarray[position][0] = 0;
-        quotientarray[position][1] = 0;
-        position++;              
-    }
-
-
     while(1){
-        while ((x < number) && (x |= 0)){
-            x *= 10;
-            position++;
-            quotientarray[position][0] = 0;
-            quotientarray[position][1] = 0;              
-        }
         
-        quotientarray[position][0] = x / number;
-        quotientarray[position][1] = x % number;
-        x = quotientarray[position][1];
-
+        //If the number and remainder are 0
         if((x == 0) && (quotientarray[position][0] == 0)){
             return 0;
         }
+
+        //If the remainder is < number
+        if((x < number) && (x |= 0)){
+            x *= 10;
+            quotientarray[position][0] = 0;
+            quotientarray[position][1] = 0;
+            position++;
+        }
         
-        for (int length = 0; length < position; length++){
-            if(quotientarray[length][0] == quotientarray[position][0]){
-                if (quotientarray[length][1] == quotientarray[position][1]){
-                    return length;
+
+        //If the remainder is > number
+        if(x >= number){
+            quotientarray[position][0] = x / number;
+            quotientarray[position][1] = x % number;
+            x = quotientarray[position][1] * 10;
+        
+
+            //Do some checking
+            for (int length = 0; length < position; length++){
+                if(quotientarray[length][0] == quotientarray[position][0]){
+                    if (quotientarray[length][1] == quotientarray[position][1]){
+                        return length;
+                    }
                 }
             }
-        }      
+            //Add a position. We need to initialize the next resouce in the array, or its the last value still. 
+            position++;
+            quotientarray[position][0] = 0;
+            quotientarray[position][1] = 0;
+        }   
     }
 }
+
+    
+
+    
+
+
+
+
+
+
+//     while ((x < number) && (x |= 0)){
+//         x *= 10;
+//         quotientarray[position][0] = 0;
+//         quotientarray[position][1] = 0;
+//         position++;              
+//     }
+
+
+//     while(1){
+//         while ((x < number) && (x |= 0)){
+//             x *= 10;
+//             position++;
+//             quotientarray[position][0] = 0;
+//             quotientarray[position][1] = 0;              
+//         }
+        
+//         quotientarray[position][0] = x / number;
+//         quotientarray[position][1] = x % number;
+//         x = quotientarray[position][1];
+
+//         if((x == 0) && (quotientarray[position][0] == 0)){
+//             return 0;
+//         }
+        
+//         for (int length = 0; length < position; length++){
+//             if(quotientarray[length][0] == quotientarray[position][0]){
+//                 if (quotientarray[length][1] == quotientarray[position][1]){
+//                     return length;
+//                 }
+//             }
+//         }      
+//     }
+// }
 
