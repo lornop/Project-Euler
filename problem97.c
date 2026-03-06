@@ -16,47 +16,64 @@ Find the last ten digits of this prime number.
 #include <stdint.h>
 
 /* Function Prototypes */
-void printAnswer(int64_t);
-int64_t square(int64_t);
-int64_t chopper(int64_t);
+void printAnswer(__int128_t);
+__int128_t square(__int128_t);
+__int128_t chopper(__int128_t);
 
 /* Globals */
-int64_t primeNumber = 0;
-int64_t squares[25];
 
 
 int main()
 {
+    __int128_t primeNumber = 0;
     int thefactor = 28433;
-    int maxexponent = 7830457;
-    squares[0] = 0;
-    squares[1] = 2;
+    __int128_t maxexponent = 7830457;
+    __int128_t exponent = 0;
+    __int128_t exponentRemainder = 0;
+    __int128_t prodOfSquares = 1;
+    __int128_t squareVal = 1;
 
-    for (int x = 2; squares[x] < maxexponent; x++){
-        squares[x] = square(squares[x-1]);
+
+    exponentRemainder = maxexponent;
+
+    while(exponentRemainder > 0){
+
+
+        squareVal = 2;
+        for (exponent = 1; (exponent * 2) < exponentRemainder; exponent *= 2){
+            squareVal = square(squareVal);
+        }
+
+        prodOfSquares = chopper(prodOfSquares * squareVal);
+
+        exponentRemainder = exponentRemainder - exponent;
+
     }
 
-    
+primeNumber = chopper(prodOfSquares * thefactor);
+primeNumber++;
+printAnswer(primeNumber);
+
 return 0;
 }
 
 /* We got the answer, now print it */
-void printAnswer(int64_t answer){
-    printf("The last ten digits are: %d\n", answer);
+void printAnswer(__int128_t answer){
+    printf("The last ten digits are: %lld\n", answer);
     
 }
 
 /* Input a number and square it */
-int64_t square(int64_t num){
-    int64_t answer = num * num;
-    answer = chopper(answer);
-    return answer;
+__int128_t square(__int128_t num){
+    __int128_t answer = num * num;
+    __int128_t ans = chopper(answer);
+    return ans;
 }
 
 
 /* Chop the number down to 10 digits */
-int64_t chopper(int64_t number){
-    int64_t chopped = number % 10000000000LL;
+__int128_t chopper(__int128_t number){
+    __int128_t chopped = number % 10000000000LL;
     return chopped;
 
 }
