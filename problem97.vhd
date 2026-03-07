@@ -23,20 +23,25 @@ use ieee.numeric_std.all;
 -- think of this like your function prototype
 -- what goes in, what comes out
 -- ----------------------------------------
-entity my_project is
+entity Large_Non_Mersenne_Prime is
     port(
         clk     : in std_logic;   -- clock
         reset   : in std_logic;   -- reset
-        -- inputs go here
-        -- outputs go here
+        key0    : in std_logic;   -- push button
+        HEX0 : out std_logic_vector(6 downto 0);
+        HEX1 : out std_logic_vector(6 downto 0);
+        HEX2 : out std_logic_vector(6 downto 0);
+        HEX3 : out std_logic_vector(6 downto 0);
+        HEX4 : out std_logic_vector(6 downto 0);
+        HEX5 : out std_logic_vector(6 downto 0)
     );
-end entity;
+end entity Large_Non_Mersenne_Prime;
 
 -- ----------------------------------------
 -- Architecture: this is where the work happens
 -- think of this like your main()
 -- ----------------------------------------
-architecture behavioral of my_project is
+architecture behavioral of Large_Non_Mersenne_Prime is
 
     -- internal signals go here
     -- think of these like your local variables
